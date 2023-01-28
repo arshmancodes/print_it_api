@@ -14,7 +14,6 @@ dotenv.config();
 app.use('/user', userRoutes);
 app.use('/vendor', vendorRoutes);
 app.use('/print', printRoutes);
-
 app.use('/files', express.static(path.join(__dirname, 'files')));
 
 app.listen(process.env.PORT, () => {
