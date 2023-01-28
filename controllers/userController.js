@@ -9,7 +9,7 @@ exports.getAll = (req, res) => {
         res.status(200).json({
             messaage: "The query has been executed succesfully",
             success: true,
-            data: rows[0]
+            data: rows
         })
     }).catch(e => {
         res.status(400).json({
