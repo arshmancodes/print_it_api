@@ -88,6 +88,18 @@ exports.loginUser = (req, res) => {
     })
 }
 
-
+exports.updateBalance = (req, res) => {
+    db.execute("UPDATE user SET wallet_balance=? WHERE email=?", [req.body.wallet_balance, req.body.email]).then(([rows, fieldData]) => {
+        res.status(200).json({
+            message: "Your API has been updated successfully",
+            success: true
+        })
+    }).catch(e => {
+        res.status(400).json({
+            error : e,
+            success: false
+        })
+    })
+}
 
 
