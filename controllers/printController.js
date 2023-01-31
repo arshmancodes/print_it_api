@@ -35,7 +35,7 @@ exports.postPrintData = async (req, res) => {
         }
         else
         {
-            db.execute("INSERT INTO print_requests(user_id, vendor_id, noOfCopies, size, color, file, note, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [req.body.user_id, req.body.vendor_id, req.body.noOfCopies, req.body.size, req.body.color, base_url+req.file.path, req.body.note, "Pending"]).then(([rows, fieldData]) => {
+            db.execute("INSERT INTO print_requests(customer_id, customer_name, noOfCopies, size, color, file, status, vendor_id, note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", [req.body.customer_id, req.body.customer_name, req.body.noOfCopies, req.body.size, req.body.color, base_url+req.file.path, "pending", req.body.vendor_id, req.body.note]).then(([rows, fieldData]) => {
                 res.status(200).json({
                     message: "Posted Successfully",
                     success: true

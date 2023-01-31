@@ -23,7 +23,7 @@ exports.getAll = (req, res) => {
 exports.postUser = (req, res) => {
     const salt = genSaltSync(10);
     password = hashSync(req.body.password, salt);
-    db.execute("SELECT * from user where email=?", [req.body.email]).then(([rows, fieldData]) => {
+    db.execute("SELECT * from users where email=?", [req.body.email]).then(([rows, fieldData]) => {
         if(rows.length > 0) 
         {
             res.status(200).json({
@@ -33,7 +33,7 @@ exports.postUser = (req, res) => {
         }
         else
         {
-            db.execute("INSERT INTO user(email, password, mobile_number, longitude, latitude, wallet_balance, secret) VALUES (?, ?, ?, ?, ?, ?, ?)", [req.body.email, password, req.body.mobile_number, req.body.longitude, req.body.latitude, req.body.wallet_balance, req.body.secret]).then(([rows, fieldData]) => {
+            db.execute("INSERT INTO users(name, email, password, mobile_number, longitude, latitude, wallet_balance, secret, jazz_cash_number, is_vendor) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [req.body.name ,req.body.email, password, req.body.mobile_number, req.body.longitude, req.body.latitude, req.body.wallet_balance, req.body.secret, req.body.jazzcash_number, 0]).then(([rows, fieldData]) => {
                 res.status(200).json({
                     message: "Posted Successfully",
                     success: true
