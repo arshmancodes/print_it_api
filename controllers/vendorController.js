@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 
 exports.getAll = (req, res) => {
-    db.execute("SELECT * from vendor").then(([rows, fieldData]) => {
+    db.execute("SELECT * from users WHERE is_vendor=?", [1]).then(([rows, fieldData]) => {
         res.status(200).json({
             messaage: "The query has been executed succesfully",
             success: true,
