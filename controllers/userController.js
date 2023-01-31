@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 
 exports.getAll = (req, res) => {
-    db.execute("SELECT * from user").then(([rows, fieldData]) => {
+    db.execute("SELECT * from users").then(([rows, fieldData]) => {
         res.status(200).json({
             messaage: "The query has been executed succesfully",
             success: true,
@@ -57,7 +57,7 @@ exports.postUser = (req, res) => {
 
 
 exports.loginUser = (req, res) => {
-    db.execute("SELECT * from user where email=?", [req.body.email]).then(([rows, fieldData]) => {
+    db.execute("SELECT * from users where email=?", [req.body.email]).then(([rows, fieldData]) => {
         if(rows.length > 0) 
         {
             const validPassword = compareSync(req.body.password, rows[0].password);
@@ -89,7 +89,7 @@ exports.loginUser = (req, res) => {
 }
 
 exports.updateBalance = (req, res) => {
-    db.execute("UPDATE user SET wallet_balance=? WHERE email=?", [req.body.wallet_balance, req.body.email]).then(([rows, fieldData]) => {
+    db.execute("UPDATE users SET wallet_balance=? WHERE email=?", [req.body.wallet_balance, req.body.email]).then(([rows, fieldData]) => {
         res.status(200).json({
             message: "Your API has been updated successfully",
             success: true
