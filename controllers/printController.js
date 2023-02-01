@@ -27,6 +27,21 @@ exports.getPrintByVendor = (req, res) => {
     })
 }
 
+exports.getDataByCustomer = (req, res) => {
+    db.execute("SELECT * from print_requests WHERE customer_id=?", [req.params.id]).then(([rows, fieldData]) => {
+        res.status(200).json({
+            message: "Retrieved Successfully",
+            data : rows,
+            success: true
+        })
+    }).catch(e => {
+        res.status(400).json({
+            error: e,
+            success: false
+        })
+    })
+}
+
 exports.postPrintData = async (req, res) => {
     upload(req, res, (err) => {
         if(err)
